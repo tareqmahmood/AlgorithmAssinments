@@ -89,14 +89,9 @@ int main()
         item[i].rate = item[i].profit / item[i].weight;
     }
     buildMaxHeap(item, n);
-    int *taken = new int[n + 1];
-    for(int i = 1; i <= n; i++)
-    {
-        taken[i] = 0;
-    }
     int remains = cap;
     Item best;
-    int profit = 0;
+    double profit = 0;
     while(remains > 0)
     {
         best = extractMax(item);
@@ -108,9 +103,10 @@ int main()
         }
         else
         {
-            profit = profit + best.profit * remains;
+            profit = profit + best.rate * remains;
             printf("taking %.2lf%% of %.2lf weight %.2lf profit\n", remains / best.weight * 100, best.weight, best.profit);
             remains = 0;
         }
     }
+    printf("Total profit : %.2lf", profit);
 }
